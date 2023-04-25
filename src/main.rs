@@ -26,7 +26,7 @@ use rcgen::{
 use native_tls::{self};
 use tungstenite::{self, Message, WebSocket, stream::MaybeTlsStream};
 use httparse::{self};
-use zeroconf::{prelude::*, macos::event_loop::BonjourEventLoop};
+use zeroconf::{prelude::*, linux::event_loop::AvahiEventLoop};
 use zeroconf::{MdnsBrowser, MdnsService, ServiceDiscovery, ServiceRegistration, ServiceType, TxtRecord};
 
 // process incoming json strings and transform it to match the model structure
@@ -155,8 +155,8 @@ struct Context {
 }
 
 struct MdnsLoops<'a> {
-    service: BonjourEventLoop<'a>,
-    browse: BonjourEventLoop<'a>,
+    service: AvahiEventLoop<'a>,
+    browse: AvahiEventLoop<'a>,
 }
 unsafe impl Send for MdnsLoops<'_> {}
 
